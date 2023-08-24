@@ -24,3 +24,9 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+## 기능목록
+- [x] 컴퓨터 난수생성
+- [ ] 사용자 숫자 입력받기
+- [ ] 입력값과 컴퓨터 난수 비교 후 결과 출력
+- [ ] 게임 재시작 및 종료
