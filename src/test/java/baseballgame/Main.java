@@ -45,11 +45,7 @@ public class Main {
 
         String input = scanner.nextLine();
 
-        if("2".equals(input)){
-            return true;
-        }
-
-        return false;
+        return "2".equals(input);
     }
 
 
@@ -107,11 +103,6 @@ public class Main {
         public Score() {
             this.strikeCount = 0;
             this.ballCount = 0;
-        }
-
-        public Score(int strike, int ball) {
-            this.strikeCount = strike;
-            this.ballCount = ball;
         }
 
         public void strike() {
