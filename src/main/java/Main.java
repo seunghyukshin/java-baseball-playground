@@ -6,16 +6,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        InputView inputView = new InputView();
         // 컴퓨터 난수 생성
         List<Integer> computerNumbers = _makeComputerNumbers();
         char[] computerNumberChars = _convertListToCharArray(computerNumbers);
         while (true) {
-            System.out.print("숫자를 입력해 주세요 : ");
-
-            Scanner scanner = new Scanner(System.in);
-
-            String userInputString = scanner.nextLine();
-            char[] userInputChars = userInputString.toCharArray();
+            char[] userInputChars = inputView.getUserNumbers();
 
             // 점수 계산
             Score score = _calculateScore(computerNumberChars, userInputChars);
