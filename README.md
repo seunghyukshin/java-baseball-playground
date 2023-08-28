@@ -30,3 +30,8 @@ ex) git checkout -b apply-feedback
 - [x] 사용자 숫자 입력받기
 - [x] 입력값과 컴퓨터 난수 비교 후 결과 출력
 - [x] 게임 재시작 및 종료
+
+## 고민
+- Score.toString() 굳이 ResultView로 빼야할까 ?
+  - 오히려 View Class에서 로직을 갖게 돼서 고민
+- ``_calculateScore()`` 어떻게 1depth로 ?
