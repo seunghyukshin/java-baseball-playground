@@ -7,12 +7,14 @@ public class InputView {
     }
 
     public char[] getUserNumbers(){
-
         System.out.print("숫자를 입력해 주세요 : ");
 
         String userInputString = scanner.nextLine();
-        char[] userInputCharArray = userInputString.toCharArray();
+        return userInputString.toCharArray();
+    }
+    public String getInputFinishing(){
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
 
-        return userInputCharArray;
+        return scanner.nextLine();
     }
 }

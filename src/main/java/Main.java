@@ -1,65 +1,50 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
+    static InputView inputView;
+
     public static void main(String[] args) {
+        inputView = new InputView();
 
-        InputView inputView = new InputView();
-        // 컴퓨터 난수 생성
-        List<Integer> computerNumbers = _makeComputerNumbers();
-        char[] computerNumberChars = _convertListToCharArray(computerNumbers);
-        while (true) {
-            char[] userInputChars = inputView.getUserNumbers();
+        do {
+            _playBall();
+        } while (_isOneMoreGame());
+    }
 
-            // 점수 계산
-            Score score = _calculateScore(computerNumberChars, userInputChars);
-            // 점수 출력
-            System.out.println(score);
-            if(score.isAllStrike()){
-                // 2: exit
-                if(_isExit()){
-                    break;
-                }
+    private static void _playBall() {
+        char[] computerNumbers = _createComputerNumbers(); // 컴퓨터 난수 생성
+        Score score = new Score();
+        // 3진 아웃 시 게임 종료
+        while (!score.isStrikeOut()) {
+            char[] userNumbers = inputView.getUserNumbers(); // 사용자 숫자 입력
 
-                // 1: restart
-                computerNumbers = _makeComputerNumbers();
-                computerNumberChars = _convertListToCharArray(computerNumbers);
-            }
+            score = _calculateScore(computerNumbers, userNumbers);// 점수 계산
+
+            System.out.println(score); // 점수 출력
         }
-
     }
 
-    private static boolean _isExit() {
+    private static char[] _createComputerNumbers() {
 
-        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-
-        Scanner scanner = new Scanner(System.in);
-
-        String input = scanner.nextLine();
-
-        return "2".equals(input);
-    }
-
-
-    private static List<Integer> _makeComputerNumbers() {
-        Random random = new Random();
         List<Integer> computerNumbers = new ArrayList<>();
 
-        while (true) {
-            if (computerNumbers.size() == 3) {
-                break;
-            }
-            int randomValue = random.nextInt(9) + 1;  // 1 ~ 9
-            if (!computerNumbers.contains(randomValue)) {
-                computerNumbers.add(randomValue);
-            }
+        while (computerNumbers.size() != 3) {
+            _addRandomValue(computerNumbers);
         }
 
-        return computerNumbers;
+        return _convertListToCharArray(computerNumbers);
     }
 
+    private static void _addRandomValue(List<Integer> computerNumbers) {
+        Random random = new Random();
+        int randomValue = random.nextInt(9) + 1;  // 1 ~ 9
+
+        if (!computerNumbers.contains(randomValue)) {
+            computerNumbers.add(randomValue);
+        }
+    }
 
     private static char[] _convertListToCharArray(List<Integer> list) {
         char[] charArray = new char[list.size()];
@@ -75,6 +60,7 @@ public class Main {
     private static Score _calculateScore(char[] computerNumberChars, char[] userInputChars) {
         Score score = new Score();
 
+        // TODO : refactor 1depth
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
 
@@ -87,39 +73,14 @@ public class Main {
                 }
             }
         }
+
         return score;
     }
 
-    private static class Score {
-        private int strikeCount;
-        private int ballCount;
+    private static boolean _isOneMoreGame() {
+        String finishingInput = inputView.getInputFinishing();
 
-        public Score() {
-            this.strikeCount = 0;
-            this.ballCount = 0;
-        }
-
-        public void strike() {
-            this.strikeCount++;
-        }
-
-        public void ball() {
-            this.ballCount++;
-        }
-
-        public boolean isAllStrike(){
-            return strikeCount == 3;
-        }
-
-        @Override
-        public String toString() {
-            if (strikeCount == 0 && ballCount == 0) {
-                return "Nothing";
-            }
-
-            return strikeCount + "스트라이크 " + ballCount + "볼";
-        }
+        return GameFinishDscdEnum.RESTART.getValue().equals(finishingInput);
     }
-
 
 }

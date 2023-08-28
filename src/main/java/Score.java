@@ -15,7 +15,7 @@ public class Score {
         this.ballCount++;
     }
 
-    public boolean isAllStrike() {
+    public boolean isStrikeOut() {
         return strikeCount == 3;
     }
 
