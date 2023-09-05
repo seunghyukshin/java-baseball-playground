@@ -25,4 +25,12 @@ public class Score {
     public boolean isStrikeOut() {
         return this.strikeCount == 3;
     }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "strikeCount=" + strikeCount +
+                ", ballCount=" + ballCount +
+                '}';
+    }
 }
