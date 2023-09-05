@@ -57,4 +57,30 @@ public class BallsTest {
         System.out.println(score);
         assertThat(expected.equals(score.toString())).isTrue();
     }
+
+    @Test
+    public void Nothing() {
+        Ball computerBall1 = new Ball(0, 1);
+        Ball computerBall2 = new Ball(1, 2);
+        Ball computerBall3 = new Ball(2, 3);
+
+        Balls computerballs = new Balls();
+        computerballs.add(computerBall1);
+        computerballs.add(computerBall2);
+        computerballs.add(computerBall3);
+
+        Ball userBall1 = new Ball(0, 4);
+        Ball userBall2 = new Ball(1, 5);
+        Ball userBall3 = new Ball(2, 6);
+
+        Balls userBalls = new Balls();
+        userBalls.add(userBall1);
+        userBalls.add(userBall2);
+        userBalls.add(userBall3);
+
+        Score score = computerballs.compare(userBalls);
+        String expected = "Nothing";
+        System.out.println(score);
+        assertThat(expected.equals(score.toString())).isTrue();
+    }
 }

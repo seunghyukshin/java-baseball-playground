@@ -28,6 +28,10 @@ public class Score {
 
     @Override
     public String toString() {
+        if(ballCount == 0 && strikeCount == 0){
+            return "Nothing";
+        }
+
         return "Score{" +
                 "strikeCount=" + strikeCount +
                 ", ballCount=" + ballCount +

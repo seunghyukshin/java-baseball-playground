@@ -14,4 +14,8 @@ public enum BallStatus {
     public static boolean isNothing(BallStatus ballStatus) {
         return ballStatus == NOTHING;
     }
+
+    public static boolean isHit(BallStatus ballStatus) {
+        return ballStatus == BALL || ballStatus == STRIKE;
+    }
 }

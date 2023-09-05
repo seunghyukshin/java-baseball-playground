@@ -2,6 +2,7 @@ package baseball;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Balls {
     List<Ball> ballList;
@@ -25,15 +26,16 @@ public class Balls {
         return score;
     }
 
+    // Balls와 Ball 비교
     private BallStatus _compare(Ball paramBall) {
+        Optional<BallStatus> hitBallStatus = this.ballList.stream()
+                .map(ball -> ball.match(paramBall))
+                .filter(ballStatus -> BallStatus.isHit(ballStatus))
+                .findAny();
 
-        // TODO : 구현필요
-        for (int j = 0; j < 3; j++) {
-            Ball thisBall = this.ballList.get(j);
-            BallStatus ballStatus = paramBall.match(thisBall);
-            if(BallStatus.isNothing(ballStatus)){
-
-            }
+        if(hitBallStatus.isPresent()){
+            // Ball OR Strike
+            return hitBallStatus.get();
         }
 
         return BallStatus.NOTHING;
