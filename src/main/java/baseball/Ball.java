@@ -10,12 +10,21 @@ public class Ball {
     }
 
     public BallStatus match(Ball ball) {
-        if (this.position != ball.position && this.value == ball.value) {
+        if (!isEqualPosition(ball) && isEqualValue(ball)) {
             return BallStatus.BALL;
         }
-        if (this.position == ball.position && this.value == ball.value) {
+        if (isEqualPosition(ball) && isEqualValue(ball)) {
             return BallStatus.STRIKE;
         }
         return BallStatus.NOTHING;
     }
+
+    public boolean isEqualValue(Ball ball) {
+        return this.value == ball.value;
+    }
+
+    public boolean isEqualPosition(Ball ball) {
+        return this.position == ball.position;
+    }
+
 }
