@@ -1,6 +1,8 @@
 package baseball;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Balls {
@@ -71,13 +73,31 @@ public class Balls {
 
     // 난수 Balls 생성
     public void initRandomBalls() {
-        int index = this.ballList.size();
+        ballList.clear();
+
         while (this.ballList.size() != 3) {
-            add(new Ball(index, RandomUtils.createSingleDigitNumber()));
+            add(new Ball(this.ballList.size(), RandomUtils.createSingleDigitNumber()));
         }
     }
 
     public Ball getBall(int position) {
         return this.ballList.get(position);
+    }
+
+    public void addBall(int value) {
+        int position = this.ballList.size();
+        this.add(new Ball(position, value));
+    }
+
+    // 3글자 String을 Ball 3개로 만들어서 ballList에 저장
+    public void makeBalls(String paramString) {
+        Arrays.stream(paramString.split(""))
+                .map(userBall -> Integer.parseInt(userBall))
+                .forEach(value -> this.addBall(value));
+    }
+
+    @Override
+    public String toString(){
+        return ballList.toString();
     }
 }

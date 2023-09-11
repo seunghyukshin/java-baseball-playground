@@ -27,4 +27,11 @@ public class Ball {
         return this.position == ball.position;
     }
 
+    @Override
+    public String toString() {
+        return "Ball{" +
+                "position=" + position +
+                ", value=" + value +
+                '}';
+    }
 }

@@ -19,6 +19,7 @@ public class RandomTest {
             assertThat(value < 9 && value > 0).isTrue();
         }
 
+        Integer integer = 3;
 
 
 

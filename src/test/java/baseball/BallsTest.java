@@ -50,10 +50,7 @@ public class BallsTest {
         userBalls.add(userBall3);
 
         Score score = computerballs.compare(userBalls);
-        String expected = "Score{" +
-                "strikeCount=" + 1 +
-                ", ballCount=" + 1 +
-                '}';
+        String expected = "1볼 1스트라이크";
         System.out.println(score);
         assertThat(expected.equals(score.toString())).isTrue();
     }
