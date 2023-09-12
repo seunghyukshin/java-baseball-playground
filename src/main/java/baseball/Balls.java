@@ -2,7 +2,6 @@ package baseball;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Balls {
@@ -12,7 +11,7 @@ public class Balls {
         ballList = new ArrayList<>();
     }
 
-    public void add(Ball ball) {
+    public void add(Ball ball)  {
         // TODO: ALERT 출력
         if (!_validate(ball)) {
             return;
@@ -30,12 +29,6 @@ public class Balls {
             return check;
         }
 
-        // 1~9 숫자인지 검증
-        // TODO: Number Domain 생성
-        if (ball.value <= 0 || ball.value > 9) {
-            check = false;
-            return check;
-        }
 
         // 중복값 검증 (모든 ball에서 같은 value가 없어야함)
         check = ballList.stream().noneMatch(thisBall -> thisBall.isEqualValue(ball));
@@ -72,11 +65,15 @@ public class Balls {
 
 
     // 난수 Balls 생성
-    public void initRandomBalls() {
+    public void initRandomBalls()  {
         ballList.clear();
 
         while (this.ballList.size() != 3) {
-            add(new Ball(this.ballList.size(), RandomUtils.createSingleDigitNumber()));
+            try {
+                addBall(NumberUtils.createSingleDigitNumber());
+            } catch (BallNumberOutOfBoundsException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -84,16 +81,22 @@ public class Balls {
         return this.ballList.get(position);
     }
 
-    public void addBall(int value) {
+    public void addBall(int value) throws BallNumberOutOfBoundsException {
         int position = this.ballList.size();
         this.add(new Ball(position, value));
     }
 
     // 3글자 String을 Ball 3개로 만들어서 ballList에 저장
-    public void makeBalls(String paramString) {
+    public void makeBalls(String paramString) throws BallNumberOutOfBoundsException {
         Arrays.stream(paramString.split(""))
                 .map(userBall -> Integer.parseInt(userBall))
-                .forEach(value -> this.addBall(value));
+                .forEach(value -> {
+                    try {
+                        this.addBall(value);
+                    } catch (BallNumberOutOfBoundsException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 
     @Override

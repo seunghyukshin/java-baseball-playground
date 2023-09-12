@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class BallsTest {
     @Test
-    public void strikeOut() {
+    public void strikeOut() throws BallNumberOutOfBoundsException {
         Ball computerBall1 = new Ball(0, 5);
         Ball computerBall2 = new Ball(1, 2);
         Ball computerBall3 = new Ball(2, 7);
@@ -30,7 +30,7 @@ public class BallsTest {
     }
 
     @Test
-    public void oneBallOneStrike() {
+    public void oneBallOneStrike() throws BallNumberOutOfBoundsException {
         Ball computerBall1 = new Ball(0, 5);
         Ball computerBall2 = new Ball(1, 2);
         Ball computerBall3 = new Ball(2, 7);
@@ -56,7 +56,7 @@ public class BallsTest {
     }
 
     @Test
-    public void Nothing() {
+    public void Nothing() throws BallNumberOutOfBoundsException {
         Ball computerBall1 = new Ball(0, 1);
         Ball computerBall2 = new Ball(1, 2);
         Ball computerBall3 = new Ball(2, 3);

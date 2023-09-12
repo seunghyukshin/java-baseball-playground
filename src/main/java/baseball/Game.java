@@ -18,11 +18,18 @@ public class Game {
         Balls computerBalls = new Balls();
         computerBalls.initRandomBalls();
 
-        System.out.println(computerBalls);
+//        System.out.println(computerBalls);
         while (!score.isStrikeOut()) {
             Balls userBalls = new Balls();
-            userBalls.makeBalls(InputView.getUserBalls());
-            System.out.println(userBalls);
+            String userBall = InputView.getUserBalls();
+
+            try {
+                userBalls.makeBalls(userBall);
+            } catch (BallNumberOutOfBoundsException e) {
+                userBall = InputView.getUserBalls();
+            }
+
+//            System.out.println(userBalls);
 
             // 점수계산
             score = computerBalls.compare(userBalls);
