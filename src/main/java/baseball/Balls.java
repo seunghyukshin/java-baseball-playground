@@ -24,7 +24,7 @@ public class Balls {
         boolean check;
 
         // size가 3보다 작은지 검증
-        if (this.ballList.size() > 3) {
+        if (_isFullBallList()) {
             check = false;
             return check;
         }
@@ -34,7 +34,10 @@ public class Balls {
         check = ballList.stream().noneMatch(thisBall -> thisBall.isEqualValue(ball));
 
         return check;
+    }
 
+    private boolean _isFullBallList(){
+        return this.ballList.size() == 3;
     }
 
     // Balls와 Balls 비교하며 Score Update
@@ -68,17 +71,13 @@ public class Balls {
     public void initRandomBalls()  {
         ballList.clear();
 
-        while (this.ballList.size() != 3) {
+        while (!_isFullBallList()) {
             try {
-                addBall(NumberUtils.createSingleDigitNumber());
+                addBall(NumberUtils.createSingleDigitNumber()); // 1 ~ 9
             } catch (BallNumberOutOfBoundsException e) {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    public Ball getBall(int position) {
-        return this.ballList.get(position);
     }
 
     public void addBall(int value) throws BallNumberOutOfBoundsException {
